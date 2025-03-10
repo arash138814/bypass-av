@@ -1,0 +1,47 @@
+import ast
+import random
+import re
+import argparse
+def generate_random_data(length):
+    characters = ['O', '0']
+    random_string = 'O'
+    random_string += ''.join(random.choice(characters) for _ in range(length - 1))
+    return random_string
+def extract_variables(filename):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            try:
+                tree = ast.parse(file.read(), filename=filename)
+            except SyntaxError:
+                print("A problem with syntax errors has been found in the input file. Please check the input file and try again.")
+                exit()
+    except TypeError:
+        print("Input file not found.")
+        exit()
+    variables = set()
+    class VariableVisitor(ast.NodeVisitor):
+        def visit_Assign(self, node):
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    variables.add(target.id)
+            self.generic_visit(node)
+    visitor = VariableVisitor()
+    visitor.visit(tree)
+    return variables
+def replace_variables_with_random(filename, output_filename):
+    variables = extract_variables(filename)
+    with open(filename, "r", encoding="utf-8") as file:
+        content = file.read()
+    for var in variables:
+        random_value = generate_random_data(length=10)
+        content = re.sub(r'\b' + re.escape(var) + r'\b', random_value, content)
+    try:
+        with open(output_filename, "w", encoding="utf-8") as file:
+            file.write(content)
+    except TypeError:
+        print("Output file not found.")
+    exit()
+if __name__ == "__main__":
+    input_file = "" # Your input python file
+    output_file = "" # Your output python file
+    replace_variables_with_random(input_file, output_file)
