@@ -5,12 +5,13 @@ This project contains simple proof-of-concept (PoC) examples in **C language** d
 > ⚠️ **Disclaimer**: This repository is intended for **educational and research purposes only**. Use only in lab environments where you have explicit permission. The author does **not** condone illegal or unethical use.
 
 ## 📂 Project Structure
-./EncryptAndDecrypt1.c
-./EncryptAndDecrypt2.c
-./template1.c
-./template2.c
-./template3.c
-./template4.c
+
+- `EncryptAndDecrypt1.c`
+- `EncryptAndDecrypt2.c`
+- `template1.c`
+- `template2.c`
+- `template3.c`
+- `template4.c`
 
 ## 🔍 Techniques Covered
 - Shellcode obfuscation and encoding
@@ -18,4 +19,3 @@ This project contains simple proof-of-concept (PoC) examples in **C language** d
 - Inline execution of malicious payloads
 - Avoiding string-based detection
 - Reducing behavioral indicators
-
