@@ -28,8 +28,8 @@ This project contains simple proof-of-concept (PoC) examples in **C language** d
 
 ## 🔐 Shellcode Encryption Workflow (How to Use `XOREncrypt`)
 
-Before using `template3.c` or `template4.c`, you need to **encrypt your shellcode** with the `XOREncrypt()` helper function.
-If you are using GCC, all these files must be compiled with the `-z execstack` switch.
+- Before using `template3.c` or `template4.c`, you need to **encrypt your shellcode** with the `XOREncrypt()` helper function.
+- If you are using GCC, all these files must be compiled with the `-z execstack` switch.
 
 ## 🔍 Techniques Covered
 - Shellcode obfuscation and encoding
