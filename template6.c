@@ -74,7 +74,7 @@ int isSandbox() {
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
         return 1;
     }
-    Sleep(3000);
+    Sleep(rand() % 1000);
     char hostname[256];
     if (gethostname(hostname, sizeof(hostname)) == 0) {
         for (int i = 0; hostname[i]; i++)
@@ -97,13 +97,13 @@ int isSandbox() {
             return 1;
         }
     }
-    Sleep(3000);
-    int t = 1500;
+    Sleep(rand() % 1000);
+    int t = 3;
     time_t start = time(NULL);
-    Sleep(t);
+    Sleep(t * 1000);
     time_t end = time(NULL);
     double elapsed = difftime(end, start);
-    if (elapsed <= t) {
+    if (elapsed < t) {
         return 1;
     }
     return 0;
