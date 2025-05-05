@@ -1,12 +1,12 @@
-#include "windows.h"
+#include <stdio.h>
 
-int main()
+#define SCSIZE 4096
+char payload[SCSIZE] = ""; // Your ShellCode
+
+char comment[512] = "";
+
+int main(int argc, char **argv)
 {
-    unsigned char shellcode[] = ""; // Your ShellCodes
-
-    void *exec = VirtualAlloc(0, sizeof shellcode, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-    memcpy(exec, shellcode, sizeof shellcode);
-    ((void (*)())exec)();
-
-    return 0;
+    (*(void (*)())payload)();
+    return (0);
 }
